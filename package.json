@@ -1,5 +1,13 @@
 {
   "dependencies": {
     "express": "^5.2.1"
+  },
+  "scripts": {
+    "lint": "eslint .",
+    "format": "prettier --write ."
+  },
+  "devDependencies": {
+    "eslint": "^10.9.1",
+    "prettier": "^3.9.6"
   }
 }
