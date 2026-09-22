@@ -25,17 +25,31 @@ const customDisplay = new CustomDisplay(client);
 
 async function main() {
   try {
-    const result = await customDisplay.showText('Привет, Divoom!', {
-      x: 0,
-      y: 10,
-      width: 720,
-      height: 90,
-      align: 2,
-      fontSize: 64,
-      fontId: 126,
-      fontColor: '#FFFFFF',
-      bgColor: '#000000',
-    });
+    // const result = await customDisplay.showText('Привет, Divoom!', {
+    //   x: 0,
+    //   y: 10,
+    //   width: 720,
+    //   height: 90,
+    //   align: 2,
+    //   fontSize: 64,
+    //   fontId: 126,
+    //   fontColor: '#FFFFFF',
+    //   bgColor: '#000000',
+    // });
+    const result = await customDisplay.showText(
+      'https://f.divoom-gz.com/320320.gif',
+      {
+        x: 13,
+        y: 227,
+        width: 320,
+        height: 320,
+        align: 2,
+        fontSize: 115,
+        fontId: 126,
+        fontColor: '#484D12',
+        bgColor: '#FF0000',
+      },
+    );
 
     console.log(result);
   } catch (error) {
