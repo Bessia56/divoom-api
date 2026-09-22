@@ -8,6 +8,7 @@ class DivoomClient {
   constructor(ip) {
     this.ip = ip;
   }
+
   /**
    * Отправляет команду на Divoom и возвращает
    * распарсенный JSON-ответ от устройства.
@@ -28,7 +29,7 @@ class DivoomClient {
     if (data.ReturnCode !== 0) {
       throw new Error(data.ReturnMessage);
     }
-    
+
     return data;
   }
 }
