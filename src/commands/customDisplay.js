@@ -55,6 +55,34 @@ class CustomDisplay {
       ],
     });
   }
-}
+
+
+   showImage(url, options) {
+    return this.client.sendCommand({
+      Command: 'Device/EnterCustomControlMode',
+
+      BackgroudImageAddr:
+        'http://192.168.1.40:3000/static/the-boxhead-wanderer-pr-800x1280.jpg',
+
+      BackgroudImageLocalFlag: 0,
+
+      DispList: [
+        {
+        ID: 13,
+        Type: 'Image',
+        StartX: options.x,
+        StartY: options.y,
+        Width: options.width,
+        Height: options.height,
+        Url: url,
+        },
+      ],
+    });
+  }
+
+};
+
+
+
 
 module.exports = CustomDisplay;
