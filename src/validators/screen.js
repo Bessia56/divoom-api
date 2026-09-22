@@ -37,5 +37,5 @@ module.exports = {
   mirrorModeSchema,
   hourModeSchema,
   longitudeSchema,
-  latitudeSchema
+  latitudeSchema,
 };
