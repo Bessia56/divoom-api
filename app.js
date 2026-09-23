@@ -36,22 +36,15 @@ async function main() {
     //   fontColor: '#FFFFFF',
     //   bgColor: '#000000',
     // });
-    const result = await customDisplay.showText(
+    const result = await customDisplay.showImage(
       'https://f.divoom-gz.com/320320.gif',
       {
         x: 13,
         y: 227,
         width: 320,
         height: 320,
-        align: 2,
-        fontSize: 115,
-        fontId: 126,
-        fontColor: '#484D12',
-        bgColor: '#FF0000',
       },
     );
-
-    console.log(result);
   } catch (error) {
     console.log(error.message);
   }
