@@ -7,7 +7,10 @@ const CustomDisplay = require('./src/commands/customDisplay');
 
 const client = new DivoomClient('192.168.1.41');
 const screen = new Screen(client);
-const customDisplay = new CustomDisplay(client);
+const customDisplay = new CustomDisplay(
+  client,
+  'http://192.168.1.40:3000/static/the-boxhead-wanderer-pr-800x1280.jpg',
+);
 
 // async function main() {
 //   try {
@@ -36,7 +39,6 @@ async function main() {
     //   fontColor: '#FFFFFF',
     //   bgColor: '#000000',
     // });
-
     // const result = await customDisplay.showImage(
     //   'https://f.divoom-gz.com/320320.gif',
     //   {
@@ -46,19 +48,17 @@ async function main() {
     //     height: 320,
     //   },
     // );
-
-    // const result = await customDisplay.showTime({
-    //   x: 474,
-    //   y: 1123,
-    //   width: 308,
-    //   height: 125,
-    //   align: 1,
-    //   fontSize: 95,
-    //   fontId: 52,
-    //   fontColor: '#A8B35E',
-    //   bgColor: '#FF0000',
-    // });
-
+    const result = await customDisplay.showTime({
+      // x: 474,
+      // y: 1123,
+      // width: 308,
+      // height: 125,
+      // align: 1,
+      // fontSize: 95,
+      // fontId: 52,
+      // fontColor: '#A8B35E',
+      // bgColor: '#FF0000',
+    });
     // const result = await customDisplay.showMday({
     //   x: 200,
     //   y: 550,
@@ -70,7 +70,6 @@ async function main() {
     //   fontColor: '#FFFFFF',
     //   bgColor: '#000000',
     // });
-
     // const result = await customDisplay.showMonYear({
     //   x: 100,
     //   y: 500,
@@ -82,7 +81,6 @@ async function main() {
     //   fontColor: '#FFFFFF',
     //   bgColor: '#000000',
     // });
-
     // const result = await customDisplay.showWeek({
     //   x: 100,
     //   y: 500,
@@ -94,18 +92,17 @@ async function main() {
     //   fontColor: '#FFFFFF',
     //   bgColor: '#000000',
     // });
-
-    const result = await customDisplay.showTemperature({
-      x: 100,
-      y: 500,
-      width: 300,
-      height: 100,
-      align: 2,
-      fontSize: 70,
-      fontId: 52,
-      fontColor: '#FFFFFF',
-      bgColor: '#000000',
-    });
+    // const result = await customDisplay.showTemperature({
+    //   x: 100,
+    //   y: 500,
+    //   width: 300,
+    //   height: 100,
+    //   align: 2,
+    //   fontSize: 70,
+    //   fontId: 52,
+    //   fontColor: '#FFFFFF',
+    //   bgColor: '#000000',
+    // });
   } catch (error) {
     console.log(error.message);
   }

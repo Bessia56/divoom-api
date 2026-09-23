@@ -9,8 +9,35 @@ const {
 } = require('../validators/customDisplay');
 
 class CustomDisplay {
-  constructor(client) {
+  constructor(client, backgroundUrl) {
     this.client = client;
+    this.backgroundUrl = backgroundUrl;
+  }
+
+  _createDisplayElement(id, type, options) {
+    // Формируем общий объект элемента для DispList.
+    return {
+      ID: id,
+      Type: type,
+      StartX: options.x,
+      StartY: options.y,
+      Width: options.width,
+      Height: options.height,
+      Align: options.align,
+      FontSize: options.fontSize,
+      FontID: options.fontId,
+      FontColor: options.fontColor,
+      BgColor: options.bgColor,
+    };
+  }
+
+  _sendCustomControl(dispList) {
+    return this.client.sendCommand({
+      Command: 'Device/EnterCustomControlMode',
+      BackgroudImageAddr: this.backgroundUrl,
+      BackgroudImageLocalFlag: 0,
+      DispList: dispList,
+    });
   }
 
   /**
@@ -37,31 +64,11 @@ class CustomDisplay {
       ...options,
     });
 
-    return this.client.sendCommand({
-      Command: 'Device/EnterCustomControlMode',
+    const element = this._createDisplayElement(5, 'Text', options);
 
-      BackgroudImageAddr:
-        'http://192.168.1.40:3000/static/the-boxhead-wanderer-pr-800x1280.jpg',
+    element.TextMessage = text;
 
-      BackgroudImageLocalFlag: 0,
-
-      DispList: [
-        {
-          ID: 5,
-          Type: 'Text',
-          StartX: options.x,
-          StartY: options.y,
-          Width: options.width,
-          Height: options.height,
-          Align: options.align,
-          FontSize: options.fontSize,
-          FontID: options.fontId,
-          FontColor: options.fontColor,
-          BgColor: options.bgColor,
-          TextMessage: text,
-        },
-      ],
-    });
+    return this._sendCustomControl([element]);
   }
 
   /**
@@ -82,27 +89,12 @@ class CustomDisplay {
       ...options,
     });
 
-    return this.client.sendCommand({
-      Command: 'Device/EnterCustomControlMode',
+    const element = this._createDisplayElement(13, 'Image', options);
 
-      BackgroudImageAddr:
-        'http://192.168.1.40:3000/static/the-boxhead-wanderer-pr-800x1280.jpg',
+    element.Url = url;
+    element.ImgLocalFlag = 0;
 
-      BackgroudImageLocalFlag: 0,
-
-      DispList: [
-        {
-          ID: 13,
-          Type: 'Image',
-          StartX: options.x,
-          StartY: options.y,
-          Width: options.width,
-          Height: options.height,
-          Url: url,
-          ImgLocalFlag: 0,
-        },
-      ],
-    });
+    return this._sendCustomControl([element]);
   }
 
   /**
@@ -124,31 +116,9 @@ class CustomDisplay {
    */
   async showTime(options) {
     await showTimeSchema.validate(options);
+    const element = this._createDisplayElement(4, 'Time', options);
 
-    return this.client.sendCommand({
-      Command: 'Device/EnterCustomControlMode',
-
-      BackgroudImageAddr:
-        'http://192.168.1.40:3000/static/the-boxhead-wanderer-pr-800x1280.jpg',
-
-      BackgroudImageLocalFlag: 0,
-
-      DispList: [
-        {
-          ID: 4,
-          Type: 'Time',
-          StartX: options.x,
-          StartY: options.y,
-          Width: options.width,
-          Height: options.height,
-          Align: options.align,
-          FontSize: options.fontSize,
-          FontID: options.fontId,
-          FontColor: options.fontColor,
-          BgColor: options.bgColor,
-        },
-      ],
-    });
+    return this._sendCustomControl([element]);
   }
 
   /**
@@ -171,30 +141,9 @@ class CustomDisplay {
   async showMday(options) {
     await showMdaySchema.validate(options);
 
-    return this.client.sendCommand({
-      Command: 'Device/EnterCustomControlMode',
+    const element = this._createDisplayElement(5, 'Mday', options);
 
-      BackgroudImageAddr:
-        'http://192.168.1.40:3000/static/the-boxhead-wanderer-pr-800x1280.jpg',
-
-      BackgroudImageLocalFlag: 0,
-
-      DispList: [
-        {
-          ID: 5,
-          Type: 'Mday',
-          StartX: options.x,
-          StartY: options.y,
-          Width: options.width,
-          Height: options.height,
-          Align: options.align,
-          FontSize: options.fontSize,
-          FontID: options.fontId,
-          FontColor: options.fontColor,
-          BgColor: options.bgColor,
-        },
-      ],
-    });
+    return this._sendCustomControl([element]);
   }
 
   /**
@@ -216,31 +165,9 @@ class CustomDisplay {
    */
   async showMonYear(options) {
     await showMonYearSchema.validate(options);
+    const element = this._createDisplayElement(6, 'MonYear', options);
 
-    return this.client.sendCommand({
-      Command: 'Device/EnterCustomControlMode',
-
-      BackgroudImageAddr:
-        'http://192.168.1.40:3000/static/the-boxhead-wanderer-pr-800x1280.jpg',
-
-      BackgroudImageLocalFlag: 0,
-
-      DispList: [
-        {
-          ID: 6,
-          Type: 'MonYear',
-          StartX: options.x,
-          StartY: options.y,
-          Width: options.width,
-          Height: options.height,
-          Align: options.align,
-          FontSize: options.fontSize,
-          FontID: options.fontId,
-          FontColor: options.fontColor,
-          BgColor: options.bgColor,
-        },
-      ],
-    });
+    return this._sendCustomControl([element]);
   }
 
   /**
@@ -262,31 +189,9 @@ class CustomDisplay {
    */
   async showWeek(options) {
     await showWeekSchema.validate(options);
+    const element = this._createDisplayElement(7, 'Week', options);
 
-    return this.client.sendCommand({
-      Command: 'Device/EnterCustomControlMode',
-
-      BackgroudImageAddr:
-        'http://192.168.1.40:3000/static/the-boxhead-wanderer-pr-800x1280.jpg',
-
-      BackgroudImageLocalFlag: 0,
-
-      DispList: [
-        {
-          ID: 7,
-          Type: 'Week',
-          StartX: options.x,
-          StartY: options.y,
-          Width: options.width,
-          Height: options.height,
-          Align: options.align,
-          FontSize: options.fontSize,
-          FontID: options.fontId,
-          FontColor: options.fontColor,
-          BgColor: options.bgColor,
-        },
-      ],
-    });
+    return this._sendCustomControl([element]);
   }
 
   /**
@@ -308,31 +213,9 @@ class CustomDisplay {
    */
   async showTemperature(options) {
     await showTemperatureSchema.validate(options);
+    const element = this._createDisplayElement(11, 'Temperature', options);
 
-    return this.client.sendCommand({
-      Command: 'Device/EnterCustomControlMode',
-
-      BackgroudImageAddr:
-        'http://192.168.1.40:3000/static/the-boxhead-wanderer-pr-800x1280.jpg',
-
-      BackgroudImageLocalFlag: 0,
-
-      DispList: [
-        {
-          ID: 11,
-          Type: 'Temperature',
-          StartX: options.x,
-          StartY: options.y,
-          Width: options.width,
-          Height: options.height,
-          Align: options.align,
-          FontSize: options.fontSize,
-          FontID: options.fontId,
-          FontColor: options.fontColor,
-          BgColor: options.bgColor,
-        },
-      ],
-    });
+    return this._sendCustomControl([element]);
   }
 }
 
