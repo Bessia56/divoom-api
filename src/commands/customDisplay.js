@@ -7,13 +7,9 @@ const {
   showWeekSchema,
   showTemperatureSchema,
 } = require('../validators/customDisplay');
+const { DisplayElement } = require('../elements/displayElement');
 
 class CustomDisplay {
-  constructor(client, backgroundUrl) {
-    this.client = client;
-    this.backgroundUrl = backgroundUrl;
-  }
-
   _createDisplayElement(id, type, options) {
     // Формируем общий объект элемента для DispList.
     return {
@@ -29,15 +25,6 @@ class CustomDisplay {
       FontColor: options.fontColor,
       BgColor: options.bgColor,
     };
-  }
-
-  _sendCustomControl(dispList) {
-    return this.client.sendCommand({
-      Command: 'Device/EnterCustomControlMode',
-      BackgroudImageAddr: this.backgroundUrl,
-      BackgroudImageLocalFlag: 0,
-      DispList: dispList,
-    });
   }
 
   /**
@@ -56,19 +43,23 @@ class CustomDisplay {
    * @param {number} options.fontId - идентификатор шрифта
    * @param {string} options.fontColor - цвет текста в HEX-формате
    * @param {string} options.bgColor - цвет фона текста в HEX-формате
-   * @returns {Promise<Object>} ответ устройства Divoom
+   * @returns {Promise<Object>} объект элемента для DispList
    */
-  async showText(text, options) {
+  async showText(key, text, options) {
+    console.log('SHOW TEXT ARGS:');
+    console.log('key:', key);
+    console.log('text:', text);
+    console.log('options:', options);
+
     await showTextSchema.validate({
       text,
       ...options,
     });
 
-    const element = this._createDisplayElement(5, 'Text', options);
-
-    element.TextMessage = text;
-
-    return this._sendCustomControl([element]);
+    return new DisplayElement(key, 'Text', {
+      text,
+      ...options,
+    });
   }
 
   /**
@@ -81,7 +72,7 @@ class CustomDisplay {
    * @param {number} options.y - координата Y области изображения
    * @param {number} options.width - ширина области изображения
    * @param {number} options.height - высота области изображения
-   * @returns {Promise<Object>} ответ устройства Divoom
+   * @returns {Promise<Object>} объект элемента для DispList
    */
   async showImage(url, options) {
     await showImageSchema.validate({
@@ -94,7 +85,7 @@ class CustomDisplay {
     element.Url = url;
     element.ImgLocalFlag = 0;
 
-    return this._sendCustomControl([element]);
+    return element;
   }
 
   /**
@@ -112,13 +103,13 @@ class CustomDisplay {
    * @param {number} options.fontId - идентификатор шрифта
    * @param {string} options.fontColor - цвет времени в HEX-формате
    * @param {string} options.bgColor - цвет фона времени в HEX-формате
-   * @returns {Promise<Object>} ответ устройства Divoom
+   * @returns {Promise<Object>} объект элемента для DispList
    */
   async showTime(options) {
     await showTimeSchema.validate(options);
     const element = this._createDisplayElement(4, 'Time', options);
 
-    return this._sendCustomControl([element]);
+    return element;
   }
 
   /**
@@ -136,14 +127,14 @@ class CustomDisplay {
    * @param {number} options.fontId - идентификатор шрифта
    * @param {string} options.fontColor - цвет дня месяца в HEX-формате
    * @param {string} options.bgColor - цвет фона дня месяца в HEX-формате
-   * @returns {Promise<Object>} ответ устройства Divoom
+   * @returns {Promise<Object>} объект элемента для DispList
    */
   async showMday(options) {
     await showMdaySchema.validate(options);
 
     const element = this._createDisplayElement(5, 'Mday', options);
 
-    return this._sendCustomControl([element]);
+    return element;
   }
 
   /**
@@ -161,13 +152,13 @@ class CustomDisplay {
    * @param {number} options.fontId - идентификатор шрифта
    * @param {string} options.fontColor - цвет месяца и года в HEX-формате
    * @param {string} options.bgColor - цвет фона месяца и года в HEX-формате
-   * @returns {Promise<Object>} ответ устройства Divoom
+   * @returns {Promise<Object>} объект элемента для DispList
    */
   async showMonYear(options) {
     await showMonYearSchema.validate(options);
     const element = this._createDisplayElement(6, 'MonYear', options);
 
-    return this._sendCustomControl([element]);
+    return element;
   }
 
   /**
@@ -185,13 +176,13 @@ class CustomDisplay {
    * @param {number} options.fontId - идентификатор шрифта
    * @param {string} options.fontColor - цвет дня недели в HEX-формате
    * @param {string} options.bgColor - цвет фона дня недели в HEX-формате
-   * @returns {Promise<Object>} ответ устройства Divoom
+   * @returns {Promise<Object>} объект элемента для DispList
    */
   async showWeek(options) {
     await showWeekSchema.validate(options);
     const element = this._createDisplayElement(7, 'Week', options);
 
-    return this._sendCustomControl([element]);
+    return element;
   }
 
   /**
@@ -209,13 +200,12 @@ class CustomDisplay {
    * @param {number} options.fontId - идентификатор шрифта
    * @param {string} options.fontColor - цвет температуры в HEX-формате
    * @param {string} options.bgColor - цвет фона температуры в HEX-формате
-   * @returns {Promise<Object>} ответ устройства Divoom
+   * @returns {Promise<Object>} объект элемента для DispList
    */
-  async showTemperature(options) {
+  async showTemperature(key, options) {
     await showTemperatureSchema.validate(options);
-    const element = this._createDisplayElement(11, 'Temperature', options);
 
-    return this._sendCustomControl([element]);
+    return new DisplayElement(key, 'Temperature', options);
   }
 }
 
