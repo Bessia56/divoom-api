@@ -24,6 +24,13 @@ function convertDisplayElement(element) {
       TextMessage: element._options.text,
     };
   }
+  if (element.type === 'Image') {
+    return {
+      ...createBaseElement(element, 13),
+      Url: element._options.url,
+      ImgLocalFlag: 0,
+    };
+  }
 
   throw new Error(`Unsupported display element type: ${element.type}`);
 }
