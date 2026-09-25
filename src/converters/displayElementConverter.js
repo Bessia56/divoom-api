@@ -1,3 +1,13 @@
+/**
+ * Формирует общую часть объекта элемента в формате Divoom API.
+ *
+ * Используется для элементов, которые имеют одинаковые
+ * параметры расположения и отображения.
+ *
+ * @param {DisplayElement} element - внутренний элемент библиотеки
+ * @param {number} id - внутренний ID элемента для Divoom API
+ * @returns {Object} объект элемента в формате Divoom API
+ */
 function createBaseElement(element, id) {
   return {
     ID: id,
@@ -14,6 +24,17 @@ function createBaseElement(element, id) {
   };
 }
 
+/**
+ * Преобразует внутренний DisplayElement
+ * в объект, совместимый с форматом Divoom API.
+ *
+ * Тип элемента определяет дополнительные поля
+ * и внутренний ID, которые будут отправлены устройству.
+ *
+ * @param {DisplayElement} element - элемент для преобразования
+ * @returns {Object} элемент в формате Divoom API
+ * @throws {Error} если тип элемента не поддерживается
+ */
 function convertDisplayElement(element) {
   if (element.type === 'Temperature') {
     return createBaseElement(element, 11);
