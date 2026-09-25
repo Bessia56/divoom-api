@@ -74,18 +74,16 @@ class CustomDisplay {
    * @param {number} options.height - высота области изображения
    * @returns {Promise<Object>} объект элемента для DispList
    */
-  async showImage(url, options) {
+  async showImage(key, url, options) {
     await showImageSchema.validate({
       url,
       ...options,
     });
 
-    const element = this._createDisplayElement(13, 'Image', options);
-
-    element.Url = url;
-    element.ImgLocalFlag = 0;
-
-    return element;
+    return new DisplayElement(key, 'Image', {
+      url,
+      ...options,
+    });
   }
 
   /**
@@ -105,11 +103,10 @@ class CustomDisplay {
    * @param {string} options.bgColor - цвет фона времени в HEX-формате
    * @returns {Promise<Object>} объект элемента для DispList
    */
-  async showTime(options) {
+  async showTime(key, options) {
     await showTimeSchema.validate(options);
-    const element = this._createDisplayElement(4, 'Time', options);
 
-    return element;
+    return new DisplayElement(key, 'Time', options);
   }
 
   /**
@@ -129,12 +126,10 @@ class CustomDisplay {
    * @param {string} options.bgColor - цвет фона дня месяца в HEX-формате
    * @returns {Promise<Object>} объект элемента для DispList
    */
-  async showMday(options) {
+  async showMday(key, options) {
     await showMdaySchema.validate(options);
 
-    const element = this._createDisplayElement(5, 'Mday', options);
-
-    return element;
+    return new DisplayElement(key, 'Mday', options);
   }
 
   /**
@@ -154,11 +149,10 @@ class CustomDisplay {
    * @param {string} options.bgColor - цвет фона месяца и года в HEX-формате
    * @returns {Promise<Object>} объект элемента для DispList
    */
-  async showMonYear(options) {
+  async showMonYear(key, options) {
     await showMonYearSchema.validate(options);
-    const element = this._createDisplayElement(6, 'MonYear', options);
 
-    return element;
+    return new DisplayElement(key, 'MonYear', options);
   }
 
   /**
@@ -178,11 +172,10 @@ class CustomDisplay {
    * @param {string} options.bgColor - цвет фона дня недели в HEX-формате
    * @returns {Promise<Object>} объект элемента для DispList
    */
-  async showWeek(options) {
+  async showWeek(key, options) {
     await showWeekSchema.validate(options);
-    const element = this._createDisplayElement(7, 'Week', options);
 
-    return element;
+    return new DisplayElement(key, 'Week', options);
   }
 
   /**
