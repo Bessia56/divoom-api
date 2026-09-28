@@ -25,24 +25,57 @@ const displayLayout = new DisplayLayout(
 );
 
 async function main() {
-  const text = new DisplayElement('greeting', 'Text', {
-  text: 'Hello world',
-  x: 20,
-  y: 20,
-  width: 200,
-  height: 50,
-});
+  const text = await customDisplay.showText(
+    'greeting',
+    'Hello world',
+    {
+      x: 20,
+      y: 20,
+      width: 200,
+      height: 50,
+      align: 0,
+      fontSize: 20,
+      fontId: 0,
+      fontColor: '#FFFFFF',
+      bgColor: '#000000',
+    },
+  );
 
-console.log('BEFORE UPDATE:');
-console.log(text);
+  const image = await customDisplay.showImage(
+    'logo',
+    'https://f.divoom-gz.com/320320.gif',
+    {
+      x: 13,
+      y: 80,
+      width: 320,
+      height: 320,
+    },
+  );
 
-text.update({
-  x: 100,
-  width: 300,
-});
+  const temperature = await customDisplay.showTemperature(
+    'temperature',
+    {
+      x: 20,
+      y: 420,
+      width: 150,
+      height: 70,
+      align: 0,
+      fontSize: 20,
+      fontId: 0,
+      fontColor: '#FFFFFF',
+      bgColor: '#000000',
+    },
+  );
 
-console.log('AFTER UPDATE:');
-console.log(text);
+  displayLayout.add(text);
+  displayLayout.add(image);
+  displayLayout.add(temperature);
+
+  const foundElement = displayLayout.find('temperature');
+
+  console.log('FOUND ELEMENT:');
+  console.log(foundElement);
+
 }
 
 main().catch((error) => {

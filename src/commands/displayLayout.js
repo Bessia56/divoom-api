@@ -46,6 +46,10 @@ class DisplayLayout {
       DispList: displayList,
     });
   }
+
+    find(key) {
+    return this.elements.find((element) => element.key === key);
+  }
 }
 
 module.exports = DisplayLayout;

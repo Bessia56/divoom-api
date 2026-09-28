@@ -22,7 +22,6 @@ class DisplayElement {
       ...options,
     };
   }
-  
 }
 
 module.exports = {
