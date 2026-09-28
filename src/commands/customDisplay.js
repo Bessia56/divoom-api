@@ -6,6 +6,7 @@ const {
   showMonYearSchema,
   showWeekSchema,
   showTemperatureSchema,
+  showWeatherSchema,
 } = require('../validators/customDisplay');
 const { DisplayElement } = require('../elements/displayElement');
 
@@ -189,6 +190,19 @@ class CustomDisplay {
     await showTemperatureSchema.validate(options);
 
     return new DisplayElement(key, 'Temperature', options);
+  }
+
+  /**
+   * Создаёт элемент Weather.
+   *
+   * @param {string} key - уникальный ключ элемента
+   * @param {Object} options - параметры элемента
+   * @returns {Promise<DisplayElement>} созданный элемент
+   */
+  async showWeather(key, options) {
+    await showWeatherSchema.validate(options);
+
+    return new DisplayElement(key, 'Weather', options);
   }
 }
 

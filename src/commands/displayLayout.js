@@ -38,7 +38,9 @@ class DisplayLayout {
    * @returns {Promise<Object>} ответ устройства
    */
   send() {
-    const displayList = this.elements.map(convertDisplayElement);
+    const displayList = this.elements.map((element, index) =>
+      convertDisplayElement(element, index + 1),
+    );
     return this.client.sendCommand({
       Command: 'Device/EnterCustomControlMode',
       BackgroudImageAddr: this.backgroundUrl,
@@ -47,7 +49,13 @@ class DisplayLayout {
     });
   }
 
-    find(key) {
+  /**
+   * Находит элемент по ключу.
+   *
+   * @param {string} key - ключ элемента
+   * @returns {DisplayElement|undefined} найденный элемент или undefined
+   */
+  find(key) {
     return this.elements.find((element) => element.key === key);
   }
 }

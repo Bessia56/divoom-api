@@ -28,41 +28,47 @@ function createBaseElement(element, id) {
  * Преобразует внутренний DisplayElement
  * в объект, совместимый с форматом Divoom API.
  *
- * Тип элемента определяет дополнительные поля
- * и внутренний ID, которые будут отправлены устройству.
+ * Тип элемента определяет дополнительные поля.
  *
  * @param {DisplayElement} element - элемент для преобразования
+ * @param {number} id - внутренний ID элемента для Divoom API
  * @returns {Object} элемент в формате Divoom API
  * @throws {Error} если тип элемента не поддерживается
  */
-function convertDisplayElement(element) {
+function convertDisplayElement(element, id) {
   if (element.type === 'Temperature') {
-    return createBaseElement(element, 11);
+    return createBaseElement(element, id);
   }
   if (element.type === 'Text') {
     return {
-      ...createBaseElement(element, 13),
+      ...createBaseElement(element, id),
       TextMessage: element._options.text,
     };
   }
   if (element.type === 'Image') {
     return {
-      ...createBaseElement(element, 12),
+      ...createBaseElement(element, id),
       Url: element._options.url,
       ImgLocalFlag: 0,
     };
   }
   if (element.type === 'Time') {
-    return createBaseElement(element, 4);
+    return createBaseElement(element, id);
   }
   if (element.type === 'Mday') {
-    return createBaseElement(element, 5);
+    return createBaseElement(element, id);
   }
   if (element.type === 'MonYear') {
-    return createBaseElement(element, 6);
+    return createBaseElement(element, id);
   }
   if (element.type === 'Week') {
-    return createBaseElement(element, 7);
+    return createBaseElement(element, id);
+  }
+  if (element.type === 'Weather') {
+    return {
+      ...createBaseElement(element, id),
+      Url: element._options.url,
+    };
   }
 
   throw new Error(`Unsupported display element type: ${element.type}`);
