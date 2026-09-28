@@ -17,23 +17,23 @@ const { DisplayElement } = require('../elements/displayElement');
  */
 class CustomDisplay {
   /**
- * Создаёт текстовый элемент для пользовательского экрана.
- *
- * @param {string} key - уникальный ключ элемента внутри layout
- * @param {string} text - текст для отображения
- * @param {Object} options - параметры текстового элемента
- * @param {number} options.x - координата X области текста
- * @param {number} options.y - координата Y области текста
- * @param {number} options.width - ширина области текста
- * @param {number} options.height - высота области текста
- * @param {number} options.align - выравнивание: 0 — слева,
- *                                 1 — справа, 2 — по центру
- * @param {number} options.fontSize - размер шрифта
- * @param {number} options.fontId - идентификатор шрифта
- * @param {string} options.fontColor - цвет текста в HEX-формате
- * @param {string} options.bgColor - цвет фона текста в HEX-формате
- * @returns {Promise<DisplayElement>} созданный элемент
- */
+   * Создаёт текстовый элемент для пользовательского экрана.
+   *
+   * @param {string} key - уникальный ключ элемента внутри layout
+   * @param {string} text - текст для отображения
+   * @param {Object} options - параметры текстового элемента
+   * @param {number} options.x - координата X области текста
+   * @param {number} options.y - координата Y области текста
+   * @param {number} options.width - ширина области текста
+   * @param {number} options.height - высота области текста
+   * @param {number} options.align - выравнивание: 0 — слева,
+   *                                 1 — справа, 2 — по центру
+   * @param {number} options.fontSize - размер шрифта
+   * @param {number} options.fontId - идентификатор шрифта
+   * @param {string} options.fontColor - цвет текста в HEX-формате
+   * @param {string} options.bgColor - цвет фона текста в HEX-формате
+   * @returns {Promise<DisplayElement>} созданный элемент
+   */
   async showText(key, text, options) {
     await showTextSchema.validate({
       text,
@@ -46,18 +46,18 @@ class CustomDisplay {
     });
   }
 
-/**
- * Создаёт элемент изображения для пользовательского экрана.
- *
- * @param {string} key - уникальный ключ элемента внутри layout
- * @param {string} url - URL изображения
- * @param {Object} options - параметры изображения
- * @param {number} options.x - координата X области изображения
- * @param {number} options.y - координата Y области изображения
- * @param {number} options.width - ширина области изображения
- * @param {number} options.height - высота области изображения
- * @returns {Promise<DisplayElement>} созданный элемент
- */
+  /**
+   * Создаёт элемент изображения для пользовательского экрана.
+   *
+   * @param {string} key - уникальный ключ элемента внутри layout
+   * @param {string} url - URL изображения
+   * @param {Object} options - параметры изображения
+   * @param {number} options.x - координата X области изображения
+   * @param {number} options.y - координата Y области изображения
+   * @param {number} options.width - ширина области изображения
+   * @param {number} options.height - высота области изображения
+   * @returns {Promise<DisplayElement>} созданный элемент
+   */
   async showImage(key, url, options) {
     await showImageSchema.validate({
       url,
@@ -87,7 +87,7 @@ class CustomDisplay {
    * @param {string} options.fontColor - цвет времени в HEX-формате
    * @param {string} options.bgColor - цвет фона времени в HEX-формате
    * @returns {Promise<DisplayElement>} созданный элемент
-   * 
+   *
    */
   async showTime(key, options) {
     await showTimeSchema.validate(options);

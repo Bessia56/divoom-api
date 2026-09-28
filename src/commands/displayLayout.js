@@ -15,12 +15,12 @@ class DisplayLayout {
   }
 
   /**
- * Добавляет элемент в layout.
- *
- * Принимает только экземпляры DisplayElement.
- *
- * @param {DisplayElement} element - элемент для добавления
- */
+   * Добавляет элемент в layout.
+   *
+   * Принимает только экземпляры DisplayElement.
+   *
+   * @param {DisplayElement} element - элемент для добавления
+   */
   add(element) {
     if (!(element instanceof DisplayElement)) {
       throw new TypeError('Expected DisplayElement');
@@ -30,13 +30,13 @@ class DisplayLayout {
   }
 
   /**
- * Формирует и отправляет пользовательский экран на устройство.
- *
- * Каждый DisplayElement преобразуется в формат Divoom API
- * перед формированием DispList.
- *
- * @returns {Promise<Object>} ответ устройства
- */
+   * Формирует и отправляет пользовательский экран на устройство.
+   *
+   * Каждый DisplayElement преобразуется в формат Divoom API
+   * перед формированием DispList.
+   *
+   * @returns {Promise<Object>} ответ устройства
+   */
   send() {
     const displayList = this.elements.map(convertDisplayElement);
     return this.client.sendCommand({
