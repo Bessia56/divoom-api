@@ -13,8 +13,16 @@ class DisplayElement {
     this.key = key;
     this.type = type;
 
-    this._options = options;// Внутренние параметры элемента, используемые converter.
+    this._options = options; // Внутренние параметры элемента, используемые converter.
   }
+
+  update(options) {
+    this._options = {
+      ...this._options,
+      ...options,
+    };
+  }
+  
 }
 
 module.exports = {
