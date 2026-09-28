@@ -24,71 +24,30 @@ const displayLayout = new DisplayLayout(
   'http://192.168.1.40:3000/static/the-boxhead-wanderer-pr-800x1280.jpg',
 );
 
-
 async function main() {
-  const text = await customDisplay.showText(
-    'greeting',
-    'Hello world',
-    {
-      x: 20,
-      y: 20,
-      width: 200,
-      height: 50,
-      align: 0,
-      fontSize: 20,
-      fontId: 0,
-      fontColor: '#FFFFFF',
-      bgColor: '#000000',
-    },
-  );
+  const text = new DisplayElement('greeting', 'Text', {
+  text: 'Hello world',
+  x: 20,
+  y: 20,
+  width: 200,
+  height: 50,
+});
 
-  const image = await customDisplay.showImage(
-    'logo',
-    'https://f.divoom-gz.com/320320.gif',
-    {
-      x: 13,
-      y: 80,
-      width: 320,
-      height: 320,
-    },
-  );
+console.log('BEFORE UPDATE:');
+console.log(text);
 
-  const temperature = await customDisplay.showTemperature(
-    'temperature',
-    {
-      x: 20,
-      y: 420,
-      width: 150,
-      height: 70,
-      align: 0,
-      fontSize: 20,
-      fontId: 0,
-      fontColor: '#FFFFFF',
-      bgColor: '#000000',
-    },
-  );
+text.update({
+  x: 100,
+  width: 300,
+});
 
-  displayLayout.add(text);
-  displayLayout.add(image);
-  displayLayout.add(temperature);
-
-  console.log('DISPLAY ELEMENTS:');
-  console.log(displayLayout.elements);
-
-  console.log('SENDING DISPLAY LAYOUT...');
-
-  const result = await displayLayout.send();
-
-  console.log('DIVOOM RESPONSE:');
-  console.log(result);
+console.log('AFTER UPDATE:');
+console.log(text);
 }
 
 main().catch((error) => {
   console.error('ERROR:', error);
 });
-
-
-
 
 app.use(
   '/static',
