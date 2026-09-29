@@ -70,6 +70,14 @@ function convertDisplayElement(element, id) {
       Url: element._options.url,
     };
   }
+  if (element.type === 'NetData') {
+    return {
+      ...createBaseElement(element, id),
+      Url: element._options.url,
+      RuleInfo: element._options.ruleInfo,
+      RequestTime: element._options.requestTime,
+    };
+  }
 
   throw new Error(`Unsupported display element type: ${element.type}`);
 }

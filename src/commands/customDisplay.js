@@ -7,6 +7,7 @@ const {
   showWeekSchema,
   showTemperatureSchema,
   showWeatherSchema,
+  showNetDataSchema,
 } = require('../validators/customDisplay');
 const { DisplayElement } = require('../elements/displayElement');
 
@@ -203,6 +204,19 @@ class CustomDisplay {
     await showWeatherSchema.validate(options);
 
     return new DisplayElement(key, 'Weather', options);
+  }
+
+  /**
+   * Создаёт элемент NetData.
+   *
+   * @param {string} key - уникальный ключ элемента
+   * @param {Object} options - параметры элемента
+   * @returns {Promise<DisplayElement>} созданный элемент
+   */
+  async showNetData(key, options) {
+    await showNetDataSchema.validate(options);
+
+    return new DisplayElement(key, 'NetData', options);
   }
 }
 
