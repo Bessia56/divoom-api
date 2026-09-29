@@ -26,6 +26,15 @@ class DisplayLayout {
       throw new TypeError('Expected DisplayElement');
     }
 
+    const existingIndex = this.elements.findIndex(
+      (item) => item.key === element.key,
+    );
+
+    if (existingIndex !== -1) {
+      this.elements[existingIndex] = element;
+      return;
+    }
+
     this.elements.push(element);
   }
 
