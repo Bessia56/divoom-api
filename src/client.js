@@ -1,3 +1,5 @@
+const fonts = require('./data/fonts.json');
+
 /**
  * Клиент для взаимодействия с локальным API Divoom.
  *
@@ -8,7 +10,9 @@ class DivoomClient {
   constructor(ip) {
     this.ip = ip;
   }
-
+  async getFonts() {
+    return fonts;
+  }
   /**
    * Отправляет команду на Divoom и возвращает
    * распарсенный JSON-ответ от устройства.
