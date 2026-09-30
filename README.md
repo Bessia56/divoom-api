@@ -155,7 +155,7 @@ const customDisplay = new CustomDisplay();
 
 
 ```js
-const text = customDisplay.showText('title', 'Hello, Divoom', {
+const text = await customDisplay.showText('title', 'Hello, Divoom', {
   x: 100,
   y: 100,
   width: 400,
@@ -181,7 +181,7 @@ const text = customDisplay.showText('title', 'Hello, Divoom', {
 **Результат:** возвращает созданный `DisplayElement`.
 
 ```js
-const image = customDisplay.showImage('logo', 'https://example.com/image.jpg', options);
+const image = await customDisplay.showImage('logo', 'https://example.com/image.jpg', options);
 ```
 
 ### `.showTime(key, options)`
@@ -195,7 +195,7 @@ const image = customDisplay.showImage('logo', 'https://example.com/image.jpg', o
 **Результат:** возвращает созданный `DisplayElement`.
 
 ```js
-const time = customDisplay.showTime('time', options);
+const time = await customDisplay.showTime('time', options);
 ```
 
 ### `.showMday(key, options)`
@@ -210,7 +210,7 @@ Cоздаёт элемент с днём месяца.
 **Результат:** возвращает созданный `DisplayElement`.
 
 ```js
-const day = customDisplay.showMday('day', options);
+const day = await customDisplay.showMday('day', options);
 ```
 
 ### `.showMonYear(key, options)`
@@ -224,7 +224,7 @@ const day = customDisplay.showMday('day', options);
 **Результат:** возвращает созданный `DisplayElement`.
 
 ```js
-const date = customDisplay.showMonYear('date', options);
+const date = await customDisplay.showMonYear('date', options);
 ```
 
 ### `.showWeek(key, options)`
@@ -237,7 +237,7 @@ const date = customDisplay.showMonYear('date', options);
 
 **Результат:** возвращает созданный `DisplayElement`.
 ```js
-const week = customDisplay.showWeek('week', options);
+const week = await customDisplay.showWeek('week', options);
 ```
 
 ### `.showTemperature(key, options)`
@@ -251,7 +251,7 @@ const week = customDisplay.showWeek('week', options);
 **Результат:** возвращает созданный `DisplayElement`.
 
 ```js
-const temperature = customDisplay.showTemperature('temperature', options);
+const temperature = await customDisplay.showTemperature('temperature', options);
 ```
 
 ### `.showWeather(key, options)`
