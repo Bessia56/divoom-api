@@ -10,7 +10,7 @@ class DivoomClient {
   constructor(ip) {
     this.ip = ip;
   }
-  async getFonts() {
+   getFontList() {
     return fonts;
   }
   /**

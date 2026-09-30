@@ -74,12 +74,10 @@ class Screen {
     });
   }
 
-  /**
-   * Устанавливает координаты для получения информации о погоде.
-   *
-   * @param {number} latitude - широта от -90 до 90
-   * @param {number} longitude - долгота от -180 до 180
-   */
+ /**
+ * @param {number} longitude - долгота от -180 до 180
+ * @param {number} latitude - широта от -90 до 90
+ */
   async setWeatherLocation(longitude, latitude) {
     await longitudeSchema.validate(longitude);
     await latitudeSchema.validate(latitude);

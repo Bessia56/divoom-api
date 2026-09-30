@@ -1,4 +1,23 @@
 {
+  "name": "divoom-api",
+  "version": "0.0.1",
+  "description": "Node.js library for interacting with Divoom Times Frame through its local API",
+  "main": "src/index.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bessia56/divoom-api.git"
+  },
+  "keywords": [
+    "divoom",
+    "times-frame",
+    "nodejs",
+    "api",
+    "display"
+  ],
+  "files": [
+    "src"
+  ],
   "dependencies": {
     "express": "^5.2.1",
     "yup": "^1.7.1"

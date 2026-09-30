@@ -10,11 +10,7 @@
 const express = require('express');
 const app = express();
 
-const DivoomClient = require('./src/client');
-const Screen = require('./src/commands/screen');
-const CustomDisplay = require('./src/commands/customDisplay');
-const DisplayLayout = require('./src/commands/displayLayout');
-const { DisplayElement } = require('./src/elements/displayElement');
+const { DivoomClient, Screen, CustomDisplay, DisplayLayout } = require('./src');
 
 const client = new DivoomClient('192.168.1.41');
 const screen = new Screen(client);
@@ -24,59 +20,66 @@ const displayLayout = new DisplayLayout(
   'http://192.168.1.40:3000/static/the-boxhead-wanderer-pr-800x1280.jpg',
 );
 
+// async function main() {
+//   // Включить экран
+//   await screen.turnOn();
+
+//   // Яркость 50%
+//   await screen.setBrightness(50);
+
+//   // Зеркальный режим выключен
+//   await screen.setMirrorMode(0);
+
+//   // 24-часовой формат
+//   await screen.setHourMode(1);
+
+//   // Координаты: долгота, широта
+//   await screen.setWeatherLocation(37.6173, 55.7558);
+
+//   console.log('Screen commands executed successfully');
+// }
+
+// main().catch((error) => {
+//   console.error('ERROR:', error);
+// });
+
 async function main() {
-  const text = await customDisplay.showText(
-    'greeting',
-    'Hello world',
-    {
-      x: 20,
-      y: 20,
-      width: 200,
-      height: 50,
-      align: 0,
-      fontSize: 20,
-      fontId: 0,
-      fontColor: '#FFFFFF',
-      bgColor: '#000000',
-    },
-  );
+  const result = client.getFontList();
 
-  const image = await customDisplay.showImage(
-    'logo',
-    'https://f.divoom-gz.com/320320.gif',
-    {
-      x: 13,
-      y: 80,
-      width: 320,
-      height: 320,
-    },
-  );
+  console.log('Available font IDs:');
 
-  const temperature = await customDisplay.showTemperature(
-    'temperature',
-    {
-      x: 20,
-      y: 420,
-      width: 150,
-      height: 70,
-      align: 0,
-      fontSize: 20,
-      fontId: 0,
-      fontColor: '#FFFFFF',
-      bgColor: '#000000',
-    },
-  );
-
-  displayLayout.add(text);
-  displayLayout.add(image);
-  displayLayout.add(temperature);
-
-  const foundElement = displayLayout.find('temperature');
-
-  console.log('FOUND ELEMENT:');
-  console.log(foundElement);
-
+  for (const font of result.FontList) {
+    console.log(font.id);
+  }
 }
+
+main().catch((error) => {
+  console.error('ERROR:', error);
+});
+
+// main().catch((error) => {
+//   console.error('ERROR:', error);
+// });
+// async function main() {
+// const weather = await customDisplay.showWeather('weather', {
+//   x: 100,
+//   y: 100,
+//   width: 400,
+//   height: 200,
+//   align: 1,
+//   fontSize: 40,
+//   fontId: 52,
+//   fontColor: '#FFFFFF',
+//   bgColor: '#000000',
+//   url: 'https://f.divoom-gz.com/group1/M00/0C/4D/rBAAM2fZCOSEN4MoAAAAADuUrnI59.webp',
+// });
+
+// displayLayout.add(weather);
+
+// console.log(weather);
+
+// await displayLayout.send();
+// }
 
 main().catch((error) => {
   console.error('ERROR:', error);

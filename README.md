@@ -15,7 +15,7 @@ Node.js библиотека для взаимодействия с Divoom Times
 
 ## Установка
 
-TODO: добавить название опубликованного npm-пакета.
+divoom-times-frame-10-1
 
 ```bash
 npm install <package-name>
